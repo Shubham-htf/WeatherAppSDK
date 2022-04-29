@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="cityName"
+            type="String" />
+
+        <variable
+            name="currentData"
+            type="com.htf.myweatherlibrary.models.Current" />
+
+        <variable
+            name="weather"
+            type="com.htf.myweatherlibrary.models.WeatherData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context=".ui.activities.WeatherActivity">
+
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:translationZ="2dp"
+            app:cardBackgroundColor="#1565C0"
+            app:cardCornerRadius="20sp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp">
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@{cityName}"
+                    android:textColor="#ffffff"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="\u2109"
+                    android:layout_marginEnd="10sp"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/switch1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:trackTint="#ffffff"
+                    android:thumbTint="#ffffff"
+                    app:layout_constraintEnd_toStartOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="\u2103"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/switch1"
+                    app:layout_constraintEnd_toStartOf="@+id/switch1"
+                    app:layout_constraintTop_toTopOf="@+id/switch1" />
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    temp="@{currentData.temp}"
+                    unit="@{currentData.unit}"
+                    prefix="@{``}"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@{(currentData.weather[0].main !=null ) ? currentData.weather[0].main : ``}"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginTop="10sp"
+                    android:background="@drawable/shape_1"
+                    android:elevation="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10sp"
+                    android:translationZ="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Wind Speed"
+                        android:textColor="#FFFDE7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10sp"
+                        speed="@{currentData.windSpeed}"
+                        unit="@{currentData.unit}"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textColor="#FFFDE7" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginEnd="20sp"
+                    android:background="@drawable/shape_1"
+                    android:elevation="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10sp"
+                    android:translationZ="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Humidity"
+                        android:textColor="#FFFDE7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10sp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="@{(currentData.humidity !=null ) ? currentData.humidity+` %` : ``}"
+                        android:textColor="#FFFDE7" />
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10sp"
+            android:id="@+id/rvWeatherList"
+            tools:listitem="@layout/row_weather"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
