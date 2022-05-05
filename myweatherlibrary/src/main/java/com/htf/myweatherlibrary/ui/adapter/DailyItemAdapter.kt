@@ -12,15 +12,14 @@ import com.htf.myweatherlibrary.models.DailyItem
 
 
 class DailyItemAdapter(
-    var itemList: ArrayList<DailyItem>,
-
-) : RecyclerView.Adapter<DailyItemAdapter.RowViewHolder>() {
+    private var itemList: ArrayList<DailyItem>,
+    ) : RecyclerView.Adapter<DailyItemAdapter.RowViewHolder>() {
 
     inner class RowViewHolder(private var binding: RowWeatherBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dataItem: DailyItem) {
-            binding.dailyItem=dataItem
+            binding.dailyItem=dataItem //set data into binding
         }
     }
 
@@ -51,12 +50,6 @@ class DailyItemAdapter(
         val diffUtil = DiffUtil.calculateDiff(ItemDiffUtil(oldList, this.itemList))
         diffUtil.dispatchUpdatesTo(this)
     }
-
-    fun addItem(item: DailyItem) {
-        itemList.add(item)
-        notifyItemInserted(itemList.size - 1)
-    }
-
 
 }
 

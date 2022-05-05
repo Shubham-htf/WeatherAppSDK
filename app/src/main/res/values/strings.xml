@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="please_turn_on_location">Please turn on location</string>
+    <string name="fetching_current_location">Fetching current location...</string>
 </resources>

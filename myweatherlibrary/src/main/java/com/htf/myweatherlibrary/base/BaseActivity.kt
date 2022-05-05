@@ -43,26 +43,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel>(private val 
             setVariable(layout, viewModel)
             executePendingBindings()
         }
-
-
     }
-
-    protected inline fun <reified T : ViewModel> androidx.fragment.app.Fragment.getViewModel(
-        noinline creator: (() -> T)? = null
-    ): T {
-        return if (creator == null)
-            ViewModelProvider(this)[T::class.java]
-        else
-            ViewModelProvider(this, BaseViewModelFactory(creator))[T::class.java]
-    }
-
-    protected inline fun <reified T : ViewModel> FragmentActivity.getViewModel(noinline creator: (() -> T)? = null): T {
-        return if (creator == null)
-            ViewModelProvider(this)[T::class.java]
-        else
-            ViewModelProvider(this, BaseViewModelFactory(creator))[T::class.java]
-    }
-
 
 
     override fun onBackPressed() {

@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-medium"
-                    android:text="\u2109"
+                    android:text="@string/farenheit"
                     android:layout_marginEnd="10sp"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-medium"
-                    android:text="\u2103"
+                    android:text="@string/celcius"
                     android:layout_marginEnd="5dp"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:text="Wind Speed"
+                        android:text="@string/wind_speed"
                         android:textColor="#FFFDE7" />
 
                     <TextView
@@ -193,7 +193,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:text="Humidity"
+                        android:text="@string/humidity"
                         android:textColor="#FFFDE7" />
 
                     <TextView

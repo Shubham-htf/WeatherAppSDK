@@ -29,7 +29,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding, WeatherViewModel>(W
     private lateinit var _geocoder: Geocoder
     private lateinit var _addresses: List<Address>
     private var _latitude:Double=0.0
-    private var _longitude:Double=0.0 // Faridabad lat long
+    private var _longitude:Double=0.0
 
     private val _adapter by lazy { DailyItemAdapter(arrayListOf()) }
     companion object {
@@ -63,7 +63,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding, WeatherViewModel>(W
         binding?.switch1?.setOnCheckedChangeListener { compoundButton, b ->
             if (compoundButton.isPressed){
                 if (_latitude!=0.0 && _longitude!=0.0)
-                    viewModel.getWeatherDetails(_latitude,_longitude,_appId,if (b) "imperial" else "Metric")
+                    viewModel.getWeatherDetails(_latitude,_longitude,_appId,if (b) "imperial" else "Metric") // calling api again for the selected unit
             }
         }
     }
@@ -74,17 +74,19 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding, WeatherViewModel>(W
     }
 
     private fun getExtra() {
+        // getting data from calling activity
         _appId=intent.getStringExtra("appId") ?: ""
         _latitude=intent.getDoubleExtra("latitude",0.0)
         _longitude=intent.getDoubleExtra("longitude",0.0)
-        if (_latitude!=0.0 && _longitude!=0.0){
-            viewModel.getWeatherDetails(_latitude,_longitude,_appId)
+        if (_latitude!=0.0 && _longitude!=0.0){ // check if latitude and longitude are valid
+            viewModel.getWeatherDetails(_latitude,_longitude,_appId)  //calling the weather api
             getCityNameFromLatLong()
         }
 
     }
 
     private fun getCityNameFromLatLong(){
+        // resolving city name from latitude and longitude
         _geocoder = Geocoder(this, Locale.getDefault())
         _addresses = _geocoder.getFromLocation(
             _latitude,
@@ -102,15 +104,17 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding, WeatherViewModel>(W
                     it?.let {
                         when(it){
                             is Lce.Loading->{
+                                //showing the progress bar
                                 binding?.progressBar?.visibility=View.VISIBLE
                             }
 
                             is Lce.Content->{
-                                binding?.progressBar?.visibility=View.GONE
+                                binding?.progressBar?.visibility=View.GONE //hiding the progress bar when data comes
                                 it.content.setWeatherData()
                             }
 
                             is Lce.Error->{
+                                binding?.progressBar?.visibility=View.GONE //hiding the progress bar when any error comes
                                 Toast.makeText(this@WeatherActivity,it.error,Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -121,9 +125,9 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding, WeatherViewModel>(W
     }
 
     private fun WeatherData.setWeatherData(){
-        binding?.currentData=current
+        binding?.currentData=current //set current day data into the binding
         daily?.let { list->
-            _adapter.setNewList(list)
+            _adapter.setNewList(list) //set all day's list into the adapter
         }
 
     }

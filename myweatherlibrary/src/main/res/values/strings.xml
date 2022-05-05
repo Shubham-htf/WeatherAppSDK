@@ -1,1 +1,6 @@
-<resources></resources>
+<resources>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="humidity">Humidity</string>
+    <string name="celcius">℃</string>
+    <string name="farenheit">℉</string>
+</resources>
